@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html>
+
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" type="text/css">
+    <link rel="stylesheet" href="https://v40.pingendo.com/assets/4.0.0/default/theme.css" type="text/css">
+    <title>10 Conversor de Moedas</title>
+  </head>
+
+<body>
+  <div class="py-5">
+    <div class="container">
+      <div class="row">
+        <div class="col-md-3"> </div>
+        <div class="col-md-6">
+          <div class="card text-white p-5 bg-primary">
+            <div class="card-body">
+              <h2 class="mb-4">Pintar Parede</h2>
+              <form action="/teste">
+                <div class="form-group">
+                    <label for="primeiro_valor">Largura da Parede</label>
+                    <input type="text" id="primeiro_valor" maxlength="10" class="form-control" required/>
+                </div>
+                <div class="form-group">
+                  <label for="primeiro_valor">Altura da Parede</label>
+                  <input type="text" id="primeiro_valor" maxlength="10" class="form-control" required/>
+              </div>
+                <input type="submit" value="Gerar" class="btn btn-secondary" style="margin: 0 auto;text-align:  center;display:  inherit;"/>
+                <div id="valor"></div>     
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <script>
+      
+      document.querySelector('form').addEventListener('submit',function(e){
+        //Cancelando evento de submit
+        e.preventDefault();
+        
+        //Captura Valores
+        let valores = Array.from(document.querySelectorAll('form input[type=text]')).map( e => parseFloat(e.value));      
+        
+        //Realizando Logica
+        if(isNaN(valores[0]) || isNaN(valores[1])){
+          
+          document.getElementById('valor').innerHTML = '<h2>Somente Numeros</h2>';
+
+        }else{
+          let resultado = (valores[0]*valores[1]).toFixed(2);
+          let tinta = (resultado/2).toFixed(2);
+          let html = `<p>Sua Parede Tem A Dimensão de ${valores[0]} x ${valores[1]} e Sua Area é ${resultado}m²</p>
+                      <p>Para Pintar Esta Parede Você Precisa de ${tinta} L de Tinta </p>`;
+          document.getElementById('valor').innerHTML = html;
+
+          document.querySelectorAll('form input[type=text]').forEach(function(e){
+              e.value = "";
+          });
+
+        }
+
+        
+
+      });
+
+  </script>
+</body>
+
+</html>

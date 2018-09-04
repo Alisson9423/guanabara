@@ -1,0 +1,29 @@
+<!DOCTYPE hmtl>
+	<head>
+		<title>06 Dobro, Triplo, Raiz Quadrada</title>
+	</head>
+
+	<body>
+		<div id="valor"></div>
+	</body>
+
+	<script type="text/javascript">
+		let numero = prompt("Digite um Numero");
+		
+
+		
+		if(isNaN(numero)){
+			document.getElementById("valor").innerHTML = "<h1>Digite um Numero</h1>";
+		}else{
+			numero = Number.parseInt(numero);
+			let html = `<p>O dobro de ${numero} é ${numero*2}</p>
+						<p>O Triplo de ${numero} é ${numero * 3}</p>
+						<p>A Raiz Quadrada de ${numero} é ${Math.sqrt(numero).toFixed(2)}</p>
+						`;
+			document.getElementById("valor").innerHTML = html;			
+		}
+
+
+	</script>
+
+</html>

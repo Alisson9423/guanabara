@@ -1,0 +1,91 @@
+<!DOCTYPE hmtl>
+	<head>
+		<title>04 Dissecando uma Variável</title>
+	</head>
+
+	<body>
+		<div id="valor"></div>
+	</body>
+
+	<script type="text/javascript">
+		while(!valorDigitado){
+			var valorDigitado = prompt("Dgite Algo");
+		}
+		
+
+		let checkSpace = false;
+
+		let chekNumber = false;
+
+		let alfabeticoRegExp = /[aA-zZ]/;
+
+		let alfabetico = false;
+
+		let alfabeticoVerifica = 0;
+
+		let maisculo = false;
+
+		let minusculo = false;
+
+		let alfanumerico = false;
+
+		let capitalizado = false;
+
+		let html = '';
+		
+		
+		//check se valor é numero
+		if(!isNaN(valorDigitado)){
+			
+			valorDigitado = Number.parseInt(valorDigitado);
+			chekNumber = true;
+			
+		}
+		
+		if(typeof(valorDigitado) != 'number'){
+
+			
+
+			//check Se existe espaço na string
+			checkSpace = valorDigitado.split('').some((e) => {
+				if(e == ' ') return true;
+			});
+
+			//Verifica se esta em maisculo
+			maisculo = (valorDigitado.toUpperCase() == valorDigitado)? true:false;
+
+			//Verifica se esta em minusculo
+			minusculo = (valorDigitado.toLowerCase() == valorDigitado)? true:false;
+
+			//Verifica se existe numero na string
+			valorDigitado.split('').forEach((e) => (!isNaN(e)? alfanumerico  = true:null));
+
+			//Verifica se existe apenas letras
+			alfabetico = valorDigitado.split('').every(e => alfabeticoRegExp.test(e));	
+			
+
+			//verifica se a primeira letra esta em maiusculo
+			capitalizado = valorDigitado.split('');
+
+			capitalizado = (capitalizado[0] == capitalizado[0].toUpperCase())?true:false;
+	
+		}
+
+		//Renderiza Elemtos
+		html = `
+		<h1>Valor Digitado ${valorDigitado}</h1>
+		<p>O tipo primitivo desse valor é uma ${typeof(valorDigitado)}</p>
+		<p>tem espaço ?  ${(checkSpace)?'Sim':'Não'}</p>
+		<p>É um número ? ${(chekNumber)?'Sim':'Não'}</p>
+		<p>É alfabetico ? ${(alfabetico)?'Sim':'Não'}</p>
+		<p>É alfanumerico ? ${(alfanumerico)?'Sim':'Não'}</p>
+		<p>Esta em maisculo ? ${(maisculo)?'Sim':'Não'}</p>
+		<p>Esta em minusculo ? ${(minusculo)?'Sim':'Não'}</p>
+		<p>Esta em capitalizado ? ${(capitalizado)?'Sim':'Não'}</p>
+		`;
+
+		document.getElementById("valor").innerHTML = html;
+
+	</script>
+
+</html>

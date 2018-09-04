@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html>
+
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" type="text/css">
+    <link rel="stylesheet" href="https://v40.pingendo.com/assets/4.0.0/default/theme.css" type="text/css">
+    <title>20 Sorteando uma ordem na lista</title>
+  </head>
+
+<body>
+  <div class="py-5">
+    <div class="container">
+      <div class="row">
+        <div class="col-md-3">
+            <div id="valor"></div>  
+        </div>
+        <div class="col-md-6">
+          <div class="card text-white p-5 bg-primary">
+            <div class="card-body">
+              <h2 class="mb-4">Sorteando uma ordem na lista</h2>
+              <form>
+                <div class="form-group">
+                    <label for="primeiro_valor">Nomes</label>
+                    <input type="text" name="nome" class="form-control"/>
+                </div>
+                <input type="button" id="add" value="Adicionar" class="btn btn-secondary" />
+                <input type="submit" value="Gerar" class="btn btn-secondary"/>
+                   
+              </form>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-3"><div id="resultado"></div>   </div>
+      </div>
+    </div>
+  </div>
+  <script>
+      
+        let arrayList = [] 
+      
+        document.getElementById('add').addEventListener('click',function(e){
+          
+          //Capturando valore
+          let nome = document.querySelector('form input[type=text]').value;
+          
+          //Adicionando os em um array
+          arrayList.push(nome);
+
+          // Criando um elemnto
+          let criancoElemto = document.createElement("P");
+          
+          //Criando um nó
+          let nomes = document.createTextNode(nome);
+
+          //Concatenando o nó em uma tag p
+          criancoElemto.appendChild(nomes);
+
+          //Exibindo resultado
+          document.getElementById('valor').appendChild(criancoElemto);
+          
+          //Limpando o campo
+          document.querySelector('form input[type=text]').value = '';
+        });
+
+
+        document.querySelector('form').addEventListener('submit',function(e){
+          //Cancelando evento de submit
+          e.preventDefault();
+
+
+          //Verificando tamanho do array menor que 3 exibe um alerta
+          if(arrayList.length < 3 ){
+              document.getElementById('resultado').innerHTML = '<p>Adicione Mais Nomes na Sua Lista</p>';
+          }else{
+            
+            //limpando a tela antes de exibir qualquer resultado
+            document.getElementById('resultado').innerHTML = "";
+
+            //Atribundo um array aleatorio a variavel arrayList
+            arrayList = arrayRandon(arrayList);
+
+            //percorrendo cada item do array e exibindo na tela para usuario
+            arrayList.forEach(function(e){
+                let criandoElemto = document.createElement("p");
+                let textNode = document.createTextNode(e);
+                criandoElemto.appendChild(textNode);
+                document.getElementById('resultado').appendChild(criandoElemto);
+            });
+
+          }
+        });
+
+
+        function arrayRandon(array){
+          //Tamanho do ararry
+          var i = array.length;
+
+          //array vazio retorna false
+          if ( i == 0 ) return false;
+
+          
+          while ( --i ) {
+            //gerando um número aleatorio com base no tamanho do array
+            var j = Math.floor( Math.random() * ( i + 1 ) );
+
+            //armazenando valores em variaveis temporarias 
+            var tempi = array[i];
+            var tempj = array[j];
+
+            //setando uma nova ordem no array
+            array[i] = tempj;
+            array[j] = tempi;
+            
+          }
+          
+          //Retornando array
+          return array;
+        }
+        
+  </script>
+</body>
+
+</html>
